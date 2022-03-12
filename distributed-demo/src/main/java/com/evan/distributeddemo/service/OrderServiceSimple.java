@@ -14,10 +14,13 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.util.Date;
 
+/**
+ * 解决超卖问题的简单方式
+ */
 @Slf4j
 @RequiredArgsConstructor
 @Service
-public class OrderService {
+public class OrderServiceSimple {
 
     private final OrderMapper orderMapper;
 
@@ -36,9 +39,9 @@ public class OrderService {
             throw new Exception("购买商品：" + purchaseProductId + "不存在");
         }
 
-        // 商品当前库存
+        // 展示每个线程获取的商品当前库存
         Integer currentCount = product.getCount();
-        System.out.println(Thread.currentThread().getName() + "库存数：" + currentCount);
+        log.info("{} 库存数：{}", Thread.currentThread().getName(), currentCount);
         // 校验库存
         if (purchaseProductNum > currentCount) {
             throw new Exception("商品：" + purchaseProductId + "仅剩" + currentCount + "件，无法购买");

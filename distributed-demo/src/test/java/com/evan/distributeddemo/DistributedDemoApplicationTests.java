@@ -1,6 +1,6 @@
 package com.evan.distributeddemo;
 
-import com.evan.distributeddemo.service.OrderService;
+import com.evan.distributeddemo.service.OrderServiceSimple;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ import java.util.concurrent.Executors;
 @SpringBootTest
 public class DistributedDemoApplicationTests {
     @Autowired
-    private OrderService orderService;
+    private OrderServiceSimple orderServiceSimple;
 
     @Test
     public void concurrentOrder() throws InterruptedException {
@@ -29,7 +29,7 @@ public class DistributedDemoApplicationTests {
             es.execute(() -> {
                 try {
                     cyclicBarrier.await();
-                    Integer orderId = orderService.createOrder();
+                    Integer orderId = orderServiceSimple.createOrder();
                     System.out.println("订单id：" + orderId);
                 } catch (Exception e) {
                     e.printStackTrace();
