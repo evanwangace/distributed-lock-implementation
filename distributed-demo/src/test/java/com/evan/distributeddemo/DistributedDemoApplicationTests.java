@@ -17,7 +17,7 @@ import java.util.concurrent.Executors;
 @SpringBootTest
 public class DistributedDemoApplicationTests {
 
-    @Qualifier("orderServiceSynchronizedMethod")
+    @Qualifier("orderServiceSynchronizedCodeBlock")
     @Autowired
     private OrderService orderService;
 
