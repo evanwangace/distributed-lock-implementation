@@ -1,9 +1,10 @@
 package com.evan.distributeddemo;
 
-import com.evan.distributeddemo.service.OrderServiceSimple;
+import com.evan.distributeddemo.service.OrderService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -15,8 +16,10 @@ import java.util.concurrent.Executors;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class DistributedDemoApplicationTests {
+
+    @Qualifier("orderServiceSynchronizedMethod")
     @Autowired
-    private OrderServiceSimple orderServiceSimple;
+    private OrderService orderService;
 
     @Test
     public void concurrentOrder() throws InterruptedException {
@@ -29,7 +32,7 @@ public class DistributedDemoApplicationTests {
             es.execute(() -> {
                 try {
                     cyclicBarrier.await();
-                    Integer orderId = orderServiceSimple.createOrder();
+                    Integer orderId = orderService.createOrder();
                     System.out.println("订单id：" + orderId);
                 } catch (Exception e) {
                     e.printStackTrace();

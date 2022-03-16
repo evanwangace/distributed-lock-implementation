@@ -1,4 +1,4 @@
-package com.evan.distributeddemo.service;
+package com.evan.distributeddemo.service.impl;
 
 import com.evan.distributeddemo.dao.OrderItemMapper;
 import com.evan.distributeddemo.dao.OrderMapper;
@@ -6,6 +6,7 @@ import com.evan.distributeddemo.dao.ProductMapper;
 import com.evan.distributeddemo.model.Order;
 import com.evan.distributeddemo.model.OrderItem;
 import com.evan.distributeddemo.model.Product;
+import com.evan.distributeddemo.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -15,12 +16,12 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 /**
- * 通过【查询更新后的商品库存】解决超卖问题
+ * 通过【查询更新后的商品库存的逻辑】解决超卖问题
  */
 @Slf4j
 @RequiredArgsConstructor
 @Service
-public class OrderServiceSimple {
+public class OrderServiceLogic implements OrderService {
 
     private final OrderMapper orderMapper;
 
@@ -33,6 +34,7 @@ public class OrderServiceSimple {
     private int purchaseProductNum = 1;
 
     @Transactional(rollbackFor = Exception.class)
+    @Override
     public Integer createOrder() throws Exception {
         Product product = productMapper.selectByPrimaryKey(purchaseProductId);
         if (product == null) {
