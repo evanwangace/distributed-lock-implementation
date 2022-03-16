@@ -15,7 +15,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 /**
- * 解决超卖问题的简单方式
+ * 通过【查询更新后的商品库存】解决超卖问题
  */
 @Slf4j
 @RequiredArgsConstructor
