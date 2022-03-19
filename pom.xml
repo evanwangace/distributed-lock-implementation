@@ -6,6 +6,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>distributed-demo</module>
+        <module>distributed-lock</module>
     </modules>
 
     <parent>
@@ -26,6 +27,7 @@
         <mysql.version>8.0.28</mysql.version>
         <mybatis-starter.version>2.2.1</mybatis-starter.version>
         <hutool.version>5.7.22</hutool.version>
+        <zookeeper.version>3.5.7</zookeeper.version>
     </properties>
 
     <dependencies>
@@ -65,6 +67,11 @@
                 <groupId>cn.hutool</groupId>
                 <artifactId>hutool-all</artifactId>
                 <version>${hutool.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.zookeeper</groupId>
+                <artifactId>zookeeper</artifactId>
+                <version>${zookeeper.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
