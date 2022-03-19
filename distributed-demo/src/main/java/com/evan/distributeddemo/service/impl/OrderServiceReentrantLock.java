@@ -16,14 +16,16 @@ import org.springframework.transaction.TransactionStatus;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * 通过【在代码块上加synchronized关键字加锁】解决超卖问题
+ * 通过【使用ReentrantLock加锁】解决超卖问题
  */
 @Slf4j
 @RequiredArgsConstructor
 @Service
-public class OrderServiceSynchronizedCodeBlock implements OrderService {
+public class OrderServiceReentrantLock implements OrderService {
 
     private final OrderMapper orderMapper;
 
@@ -39,6 +41,8 @@ public class OrderServiceSynchronizedCodeBlock implements OrderService {
 
     private int purchaseProductNum = 1;
 
+    private Lock lock = new ReentrantLock();
+
     /**
      * 手动控制事务，解决：第一个线程更新后，事务未提交前，又被第二个线程重新获取数量，第一个和第二个线程获得数量都是1的问题
      * 采用两个事务，解决：在同一把锁内控制事务，并且避免事务的嵌套
@@ -49,7 +53,10 @@ public class OrderServiceSynchronizedCodeBlock implements OrderService {
     @Override
     public Integer createOrder() throws Exception {
         Product product;
-        synchronized (this) {
+
+        // 手动加锁
+        lock.lock();
+        try {
             TransactionStatus transactionStatus1 = platformTransactionManager.getTransaction(transactionDefinition);
             product = productMapper.selectByPrimaryKey(purchaseProductId);
             if (product == null) {
@@ -70,6 +77,8 @@ public class OrderServiceSynchronizedCodeBlock implements OrderService {
             // 更新库存数量
             productMapper.updateProductCount(purchaseProductNum, "xxx", new Date(), product.getId());
             platformTransactionManager.commit(transactionStatus1);
+        } finally {
+            lock.unlock();
         }
 
         // 手动获取事务
