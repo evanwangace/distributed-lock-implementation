@@ -17,6 +17,9 @@ import java.util.UUID;
 @Slf4j
 public class RedisLock implements AutoCloseable {
 
+    /**
+     * 拓展：可以使用jedis、redission等实现分布式锁
+     */
     private final RedisTemplate redisTemplate;
     private final String key;
     private final String value;
