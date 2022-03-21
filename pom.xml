@@ -7,6 +7,7 @@
     <modules>
         <module>distributed-demo</module>
         <module>distributed-lock</module>
+        <module>distributed-zk-lock</module>
     </modules>
 
     <parent>
