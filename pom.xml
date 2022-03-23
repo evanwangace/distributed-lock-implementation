@@ -29,6 +29,7 @@
         <mybatis-starter.version>2.2.1</mybatis-starter.version>
         <hutool.version>5.7.22</hutool.version>
         <zookeeper.version>3.5.7</zookeeper.version>
+        <curator.version>4.3.0</curator.version>
     </properties>
 
     <dependencies>
@@ -73,6 +74,11 @@
                 <groupId>org.apache.zookeeper</groupId>
                 <artifactId>zookeeper</artifactId>
                 <version>${zookeeper.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.curator</groupId>
+                <artifactId>curator-recipes</artifactId>
+                <version>${curator.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
