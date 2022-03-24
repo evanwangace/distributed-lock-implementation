@@ -31,7 +31,7 @@
         <hutool.version>5.7.22</hutool.version>
         <zookeeper.version>3.5.7</zookeeper.version>
         <curator.version>4.3.0</curator.version>
-        <redisson.version>3.17.0</redisson.version>
+        <redisson.version>3.16.8</redisson.version>
     </properties>
 
     <dependencies>
@@ -84,7 +84,7 @@
             </dependency>
             <dependency>
                 <groupId>org.redisson</groupId>
-                <artifactId>redisson</artifactId>
+                <artifactId>redisson-spring-boot-starter</artifactId>
                 <version>${redisson.version}</version>
             </dependency>
         </dependencies>

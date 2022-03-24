@@ -37,7 +37,7 @@ public class ZookeeperController {
 
     /**
      * 基于【curator客户端】实现锁
-     * 具体参考：https://curator.apache.org/getting-started.html
+     * 参考文档：https://github.com/redisson/redisson/wiki/Table-of-Content
      */
     @RequestMapping("curatorLock")
     public String curatorLock() {
