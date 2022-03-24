@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <packaging>pom</packaging>
     <modules>
-        <module>distributed-demo</module>
+        <module>single-demo</module>
         <module>distributed-lock</module>
         <module>distributed-zk-lock</module>
         <module>distributed-redisson-lock</module>
