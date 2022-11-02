@@ -30,7 +30,7 @@ public class DistributedRedissonLockApplicationTests {
         serverConfig.setAddress("redis://localhost:6379");
         serverConfig.setPassword("root");
         RedissonClient redisson = Redisson.create(config);
-        // 通过redission获取锁
+        // 通过redisson获取锁
         RLock rLock = redisson.getLock("order");
         try {
             rLock.lock(30, TimeUnit.SECONDS);
